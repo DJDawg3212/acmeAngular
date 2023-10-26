@@ -1,0 +1,109 @@
+<div class="container">
+
+    <div class="mt-12">
+
+        <h1>Agregar Vehiculo</h1>
+        <form [formGroup]="addFormVehicle" (ngSubmit)="submitFormAddVehicle()">
+            <div class="row">
+
+                <div class="form-group mb-4 col-4">
+                    <label for="owner_id">Dueño</label>
+                    <select formControlName="owner_id" class="form-control"
+                        [ngClass]="f.owner_id.errors && f.owner_id.touched ? 'is-invalid' : ''">
+                        <option value="" selected>Seleccione...</option>
+                        <ng-container *ngFor="let owner of owners">
+                            <option value="{{owner.id}}">{{owner.name + " " +owner.last_name}}</option>
+                        </ng-container>
+                    </select>
+                    <div class="invalid-feedback">
+                        Debe seleccionar un Dueño.
+                    </div>
+                </div>
+
+                <div class="form-group mb-4 col-4">
+                    <label for="num_serie">Placa</label>
+                    <input type="text" formControlName="num_serie" class="form-control"
+                        [ngClass]="f.num_serie.errors && f.num_serie.touched ? 'is-invalid' : ''" placeholder="AAA-111">
+                    <div class="invalid-feedback">
+                        La placa es obligatorio.
+                    </div>
+                </div>
+
+                <div class="form-group mb-4 col-4">
+                    <label for="color">Color</label>
+                    <input type="text" formControlName="color" class="form-control"
+                        [ngClass]="f.color.errors && f.color.touched ? 'is-invalid' : ''" placeholder="Rojo">
+                    <div class="invalid-feedback">
+                        El color es obligatorio.
+                    </div>
+                </div>
+
+                <div class="form-group mb-4 col-4">
+                    <label for="brand">Marca</label>
+                    <select formControlName="brand" class="form-control"
+                        [ngClass]="f.brand.errors && f.brand.touched ? 'is-invalid' : ''">
+                        <option value="" selected>Seleccione...</option>
+                        <option value="Toyota">Toyota</option>
+                        <option value="Honda">Honda</option>
+                        <option value="Nissan">Nissan</option>
+                        <option value="Ford">Ford</option>
+                        <option value="Volkswagen">Volkswagen</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Seleccione una marca.
+                    </div>
+                </div>
+
+                <div class="form-group mb-4 col-4">
+                    <label for="type">Tipo</label>
+                    <select formControlName="type" class="form-control"
+                        [ngClass]="f.type.errors && f.type.touched ? 'is-invalid' : ''">
+                        <option value="" selected>Seleccione...</option>
+                        <option value="publico">Publico</option>
+                        <option value="particular">Particular</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        Seleccione un tipo.
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Insertar</button>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div>
+        <h1>Todos</h1>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Dueño</th>
+                    <th>Placa</th>
+                    <th>Color</th>
+                    <th>Marca</th>
+                    <th>Tipo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let vehicle of vehicles">
+                    <th scope="row">{{vehicle.id}}</th>
+                    <td> {{vehicle.nameOwner + " " + vehicle.lastNameOwner}}</td>
+                    <td> {{vehicle.num_serie}}</td>
+                    <td> {{vehicle.color}}</td>
+                    <td> {{vehicle.brand}}</td>
+                    <td> {{vehicle.type}}</td>
+                    <td>
+                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                            <button type="button" class="btn btn-secondary"
+                                [routerLink]="['/Home/vehicle', vehicle.id]">Editar</button>
+                            <button type="button" class="btn btn-danger"
+                                (click)="destroyVehicle(vehicle)">Eliminar</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

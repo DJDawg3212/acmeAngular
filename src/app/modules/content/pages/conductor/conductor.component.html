@@ -1,0 +1,182 @@
+<section style="background-color: #eee;">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <h1>Conductor</h1>
+                <div class="card mb-4 mb-lg-0">
+                    <form [formGroup]="updateFormConductor" (submit)="submintFormUpdateConductor()">
+                        <div class="card-body" *ngIf="conductor">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Tipo Documento</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <select class="form-control" formControlName="type_doc" name="type_doc">
+                                        <option value="" selected>Seleccione...</option>
+                                        <option value="cedula">Cédula</option>
+                                        <option value="extranjeria">Extranjería</option>
+                                        <option value="otro">Otro</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Documento</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="num_doc"
+                                        formControlName="num_doc" readonly placeholder="1000000">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Primer Nombre</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="name"
+                                        formControlName="name" placeholder="Carlos">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Segundo Nombre</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        name="other_name" formControlName="other_name" placeholder="Pedro">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Apellidos</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1"
+                                        name="last_name" formControlName="last_name" placeholder="Martinez">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Correo</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" name="email"
+                                        formControlName="email" placeholder="carlos@example.com">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Telefono</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="phone"
+                                        formControlName="phone" placeholder="3000000000">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Dirección</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="address"
+                                        formControlName="address" placeholder="Calle 26">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <p class="mb-0">Ciudad</p>
+                                </div>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" id="exampleFormControlInput1" name="city"
+                                        formControlName="city" placeholder="Bogotá D.C">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12 center-block">
+                                    <button type="submit" class="btn btn-primary">Actualizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="row">
+                    <div class="col-3">
+                        <h1>Vehiculos</h1>
+                    </div>
+                    <div class="col-3 text-right">
+
+                        <button class="btn btn-success" (click)="openModal(template)">Agregar</button>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-body" *ngIf="vehicles">
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Numero_serie</th>
+                                    <th>Color</th>
+                                    <th>Marca</th>
+                                    <th>Tipo</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let vehicle of vehicles">
+                                    <th scope="row">{{vehicle.id}}</th>
+                                    <th>{{vehicle.num_serie}}</th>
+                                    <th>{{vehicle.color}}</th>
+                                    <th>{{vehicle.brand}}</th>
+                                    <th>{{vehicle.type}}</th>
+                                    <td>
+                                        <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                            <button type="button" class="btn btn-secondary"
+                                                [routerLink]="['/Home/vehicle', vehicle.id]">Ver</button>
+                                            <button type="button" class="btn btn-danger"
+                                                (click)="detachVehicle(vehicle.id)">Eliminar</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="card-body" *ngIf="!vehicles">
+                        <div>No se encontraron Registros</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MODAL -->
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Title</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+            <span aria-hidden="Close">&times;</span>
+        </button>
+    </div>
+    <form [formGroup]="formAttachVehicle" (submit)="attachVehicle()">
+        <div class="modal-body">
+            <select formControlName="vehicle_id" class="form-control">
+                <option value="" selected>Seleccione...</option>
+                <ng-container *ngFor="let vehicle of vehiclesAll">
+                    <option value="{{vehicle.id}}">{{vehicle.num_serie + " : " +vehicle.type}}</option>
+                </ng-container>
+            </select>
+            <button class="btn btn-primary" type="submit">Agregar</button>
+        </div>
+    </form>
+</ng-template>

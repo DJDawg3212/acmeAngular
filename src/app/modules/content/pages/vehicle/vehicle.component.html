@@ -1,0 +1,137 @@
+<section style="background-color: #eee;">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-4">
+        <h1>Dueño</h1>
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <h2 class="my-3">{{owner?.name + " " + owner?.last_name}}</h2>
+            <p class="text-muted mb-1">{{owner?.type_doc + ": " + owner?.num_doc}}</p>
+            <p class="text-muted mb-1">{{owner?.address + ", " + owner?.city}}</p>
+            <div class="d-flex justify-content-center mb-2">
+              <button type="button" class="btn btn-primary" [routerLink]="['/Home/owner', owner?.id]">Ver</button>
+            </div>
+          </div>
+        </div>
+        <h1>Vehiculo</h1>
+        <div class="card mb-4 mb-lg-0">
+          <form [formGroup]="updateFormVehicle">
+            <ng-container *ngIf="vehicle">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Dueño</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <select formControlName="owner_id" class="form-control">
+                      <option value="" selected>Seleccione...</option>
+                      <ng-container *ngFor="let owner of owners">
+                        <option value="{{owner.id}}">{{owner.name + " " +owner.last_name}}</option>
+                      </ng-container>
+                    </select>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Placa</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="num_serie"
+                      placeholder="AAA-111" formControlName="num_serie">
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Color</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="exampleFormControlInput1" name="color"
+                      placeholder="Rojo" formControlName="color">
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Marca</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <select formControlName="brand" class="form-control">
+                      <option value="" selected>Seleccione...</option>
+                      <option value="Toyota">Toyota</option>
+                      <option value="Honda">Honda</option>
+                      <option value="Nissan">Nissan</option>
+                      <option value="Ford">Ford</option>
+                      <option value="Volkswagen">Volkswagen</option>
+                    </select>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-3">
+                    <p class="mb-0">Tipo</p>
+                  </div>
+                  <div class="col-sm-9">
+                    <select formControlName="type" class="form-control">
+                      <option value="" selected>Seleccione...</option>
+                      <option value="publico">Publico</option>
+                      <option value="particular">Particular</option>
+                    </select>
+                  </div>
+                </div>
+                <hr>
+                <div class="row">
+                  <div class="col-sm-12 justify-content-center">
+                    <button type="submit" class="btn btn-primary"
+                      (click)="submintFormUpdateVehicle()">Actualizar</button>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <h1>Conductores</h1>
+        <div class="card mb-4">
+          <div class="card-body">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Tipo</th>
+                  <th>Numero</th>
+                  <th>Primer Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Telefono</th>
+                  <th>Correo</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let conductor of conductors">
+                  <th scope="row">{{conductor.id}}</th>
+                  <td>{{conductor.type_doc}}</td>
+                  <td>{{conductor.num_doc}}</td>
+                  <td>{{conductor.name}}</td>
+                  <td>{{conductor.last_name}}</td>
+                  <td>{{conductor.phone}}</td>
+                  <td>{{conductor.email}}</td>
+                  <td>
+                    <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                      <button type="button" class="btn btn-secondary"
+                        [routerLink]="['/Home/conductor', conductor.id]">Ver</button>
+                      <button type="button" class="btn btn-danger"
+                        (click)="detachConductor(conductor.id)">Eliminar</button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
